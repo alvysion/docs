@@ -16,7 +16,7 @@ Your request must have the following informations:
 * Body  
 ```json
 {
-  "amountExcludingTaxes": 100
+  "amountExcludingTaxes": 100,
   "client": "Client",
   "dueDateDays": 30,
   "externalId": "ExternalId",
@@ -36,7 +36,7 @@ Interface Invoices = {
   vat: number;  // TVA amount.
 }
 ```
-:warning: At least the **client** or the **siret** must be completed. If the siret is completed, the API will query [gouv API](https://entreprise.data.gouv.fr/api_doc_sirene "API Sirene")'s establishments. If an establishment is found, you will get more information such as address or VAT number. 
+:warning: At least the **client** or the **siret** must be completed. If the siret is completed, the API will query [gouv API](https://entreprise.data.gouv.fr/api_doc_sirene "API Sirene")'s establishments. If an establishment is found, you will get more information such as address and/or VAT number. 
 
 ## Response
 
@@ -44,7 +44,7 @@ Interface Invoices = {
 ```json
 {
   "statusCode": 200,
-  "message": "Income created succefully"
+  "message": "OK"
 }
 ```
 #### Errors  
@@ -55,6 +55,14 @@ Interface Invoices = {
     "message": "Bad Request"
 }
 ```
+- Unauthorized :
+```json
+{
+    "statusCode": 401,
+    "message": "Unauthorized"
+}
+```
+
 - Required fields :
 ```json
 {
@@ -72,21 +80,10 @@ Interface Invoices = {
     "error": "vat percentage must be an official vat, 0 - 2.1 - 5.5 - 10 - 20. Your percentage is equal to 25% !"
 }
 ```
-- Unauthorized :
-```json
-{
-    "statusCode": 401,
-    "message": "Unauthorized"
-}
-```
 - Server Error :
 ```json
 {
     "statusCode": 500,
     "message": "Internal Server Error",
-    "error": {
-        "clientMessage": "Un problème est survenue lors de la création de cet élement."
-    }
 }
 ```
-
