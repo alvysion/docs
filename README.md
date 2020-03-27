@@ -20,7 +20,7 @@ Your request must have the following informations:
   "client": "Client",
   "dueDateDays": 30,
   "externalId": "ExternalId",
-  "invoiceDate": "01/01/2020",
+  "invoiceDate": "2020/01/31",
   "siret": "888888888888",
   "vat": 20,
 }
@@ -31,7 +31,7 @@ Interface Invoices = {
   client?: string;  // Client name.
   dueDateDays: number; // Payments at X days. If 0, payment on receipt of invoice.
   externalId: string; // Your own invoice id.
-  invoiceDate: string;  // Format: dd/mm/yyyy.
+  invoiceDate: string;  // Format: yyyy/mm/dd.
   siret?: string // Client siret
   vat: number;  // TVA amount.
 }
@@ -77,7 +77,7 @@ Interface Invoices = {
 ```json
 {
     "statusCode": 400,
-    "error": "vat percentage must be an official vat, 0 - 2.1 - 5.5 - 10 - 20. Your percentage is equal to 25% !"
+    "message": "vat percentage must be an official vat, 0 - 2.1 - 5.5 - 10 - 20. Your percentage is equal to 25% !"
 }
 ```
 - Server Error :
