@@ -46,7 +46,7 @@ Interface Address = {
 Interface Invoices = {
   address: Address; // Client address
   amountExcludingTaxes: number; // HT amount.
-  client?: string;  // Client name.
+  client: string;  // Client name.
   dueDateDays: number; // Payments at X days. If 0, payment on receipt of invoice.
   externalId: string; // Your own invoice id.
   invoiceDate: string;  // Format: yyyy/mm/dd.
