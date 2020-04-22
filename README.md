@@ -1,7 +1,7 @@
 # Invoices API
 API to create invoices in your organization.
 
-<details open>
+<details>
 <br>
 <summary>Invoices request</summary>
 Your request must have the following informations:
@@ -18,27 +18,44 @@ Your request must have the following informations:
 * Body  
 ```json
 {
+  "address": {
+    "city": "city",
+		"country": "country",
+		"postalCode": "postalCode",
+		"street": "street"
+  },
   "amountExcludingTaxes": 100,
   "client": "Client",
   "dueDateDays": 30,
   "externalId": "ExternalId",
   "invoiceDate": "01/01/2020",
+  "reference": "reference",
   "siret": "888888888888",
   "vat": 20,
+  "vatNumber": "FR99999999999"
 }
 ```
 ```ts
+Interface Address = {
+  city: string;
+  country: string; 
+  postalCode: string;
+  street: string;
+}
+
 Interface Invoices = {
+  address: Address; // Client address
   amountExcludingTaxes: number; // HT amount.
   client?: string;  // Client name.
   dueDateDays: number; // Payments at X days. If 0, payment on receipt of invoice.
   externalId: string; // Your own invoice id.
   invoiceDate: string;  // Format: yyyy/mm/dd.
+  reference?: string; // Invoice's references, ex: Consultant name etc.
   siret?: string // Client siret
   vat: number;  // TVA amount.
+  vatNumber?: string; // Client VAT number
 }
 ```
-:warning: At least the **client** or the **siret** must be completed. If the siret is completed, the API will query [gouv API](https://entreprise.data.gouv.fr/api_doc_sirene "API Sirene")'s establishments. If an establishment is found, you will get more information such as address and/or VAT number. 
 
 ## Response
 
@@ -86,7 +103,7 @@ Interface Invoices = {
 ```
 <br>
 </details>
-<details open>
+<details>
 <summary>Credit note request</summary>
 <br>
 Your request must have the following informations:
