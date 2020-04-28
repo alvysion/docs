@@ -18,7 +18,7 @@ Your request must have the following informations:
 * Body  
 ```json
 {
-  "addressRaw": "9 rue Lacuée, 75012 Paris"
+  "addressRaw": "9 rue Lacuée, 75012 Paris",
   "address": {
     "city": "city",
     "country": "country",
