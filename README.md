@@ -18,6 +18,7 @@ Your request must have the following informations:
 * Body  
 ```json
 {
+  "addressRaw": "9 rue Lacuée, 75012 Paris"
   "address": {
     "city": "city",
     "country": "country",
@@ -44,6 +45,7 @@ Interface Address = {
 }
 
 Interface Invoices = {
+  addressRaw: string; // Address to String with street, postal code & city
   address: Address; // Client address
   amountExcludingTaxes: number; // HT amount.
   client: string;  // Client name.
