@@ -20,10 +20,10 @@ Your request must have the following informations:
 {
   "addressRaw": "9 rue Lacuée, 75012 Paris",
   "address": {
-    "city": "city",
-    "country": "country",
-    "postalCode": "postalCode",
-    "street": "street",
+    "city": "Paris",
+    "country": "France",
+    "postalCode": "75012",
+    "street": "9 rue Lacuée",
   },
   "amountExcludingTaxes": 100,
   "client": "Client",
@@ -58,6 +58,8 @@ Interface Invoices = {
   vatNumber?: string; // Client VAT number
 }
 ```
+
+:warning: A least one of __addressRaw__ or __address__ fields are required.
 
 ## Response
 
