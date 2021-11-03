@@ -3,7 +3,7 @@ API to create invoices in your organization.
 
 <details>
 <br>
-<summary>Invoices request</summary>
+<summary>Invoices request (Deprecated, will be replaced by Incomes request)</summary>
 Your request must have the following informations:
 
 * Headers  
@@ -119,6 +119,9 @@ Your request must have the following informations:
 * Method  
   `POST`
 
+* Path
+ `/sales/uploadable-incomes`
+
 * Content-Type  
   `multipart/mixed`
 
@@ -163,6 +166,8 @@ interface IncomeInvoice {
     vatNumber?: string; // Client VAT number
 }
 ```
+
+Attention le fichier ne doit pas peser plus de 15MO.
 
 
 ## Response
