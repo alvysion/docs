@@ -54,6 +54,7 @@ Interface Invoices = {
   client: string;  // Client name.
   dueDateDays: number; // Payments at X days. If 0, payment on receipt of invoice.
   externalId: string; // Your own invoice id.
+  externalNumber?: string; // Your own invoice number.
   invoiceDate: string;  // Format: yyyy/mm/dd.
   reference?: string; // Invoice's references, ex: Consultant name etc.
   siret?: string // Client siret
@@ -158,7 +159,7 @@ interface IncomeInvoice {
     currencyCode: string;  // currencyCode EUR USD
     dueDateDays: string; // Payments at X days. If 0, payment on receipt of invoice.
     externalId: string; // Your own invoice id.
-    externalNumber?: string; // Your own invoice id.
+    externalNumber?: string; // Your own invoice number.
     file?: File, // Invoice pdf file to upload
     invoiceDate: string;  // Format: yyyy/mm/dd.
     postalCode: string; // Client postalCode 
