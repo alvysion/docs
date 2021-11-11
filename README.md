@@ -11,6 +11,9 @@ Your request must have the following informations:
 
 * Method  
 `POST`
+  
+  * Path
+`/sales/incomes`
 
 * Content-Type  
 `application/json`
@@ -203,75 +206,6 @@ Attention le fichier ne doit pas peser plus de 15MO.
 {
     "statusCode": 400,
     "error": "vat percentage must be an official vat, 0 - 2.1 - 5.5 - 10 - 20. Your percentage is equal to 25% !"
-}
-```
-<br>
-
-- Server Error :
-```json
-{
-    "statusCode": 500,
-    "message": "Internal Server Error",
-}
-```
-<br>
-</details>
-
-
-<details>
-<summary>Credit note request</summary>
-<br>
-Your request must have the following informations:
-
-* Headers  
-`Authorization: Bearer your_token`
-
-* Method  
-`POST`
-
-* Content-Type  
-`application/json`
-
-* Body  
-```json
-{
-  "amountExcludingTaxes": 100,
-  "refIncome": "refIncome",
-  "invoiceDate": "01/01/2020",
-}
-```
-```ts
-Interface Invoices = {
-  amountExcludingTaxes: number; // HT amount.
-  refIncome: string; // Your own income id.
-  invoiceDate: string;  // Format: yyyy/mm/dd.
-}
-``` 
-
-## Response
-
-#### Succes 
-```json
-{
-  "statusCode": 200,
-  "message": "OK"
-}
-```
-#### Errors  
-- Bad Request :
-```json
-{
-    "statusCode": 400,
-    "message": "Bad Request"
-}
-```
-<br>
-
-- Unauthorized :
-```json
-{
-    "statusCode": 401,
-    "message": "Unauthorized"
 }
 ```
 <br>
