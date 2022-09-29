@@ -220,3 +220,317 @@ Attention le fichier ne doit pas peser plus de 15MO.
 ```
 <br>
 </details>
+
+<details>
+<br>
+<summary>Get invoices</summary>
+Your request must have the following informations:
+
+* Headers  
+  `Authorization: Bearer your_token`
+
+* Method  
+  `GET`
+
+* Path
+ `/sales/invoices?limit=15&skip=0`
+
+* Content-Type  
+  `application/json`
+
+```ts
+limit: number; // The number of invoice you want per page
+skip: number; // The number of element on previous page (if the limit is 15 for page 2 you need to pass 15 for page 3 30 etc...)
+```
+
+
+## Response
+
+```ts
+interface Invoices {
+  amountExcludingTaxes: number, // HT amount
+  amountIncludingTaxes: number, // TTC amount
+  currencyCode: string, // currencyCode EUR USD
+  invoiceDate: string,
+  invoiceFileName: string,
+  number: string,
+  organizationId: string,
+  vat: number, // VAT amount
+  _id: string, // invoice id to give to GET invoice or download invoice
+  client: {
+      address: {
+          city: string,
+          country: string,
+          postalCode: string,
+          street: string
+      },
+      companyName: string,
+      contact: {
+          email: string,
+          firstname: string,
+          name: string,
+          phone: string
+      },
+      dueDateDays: number,
+      vatNumber: string,
+  },
+  clientId string,
+  dueDate: string,
+  dueDateDays: number,
+  items: {
+      _id: string, // Item Id
+      articleCodeRef: string,
+      description: string,
+      discount: number,
+      quantity: number,
+      unitPrice: number,
+      vat: number,
+      vatKind: string,
+      vatPercentage: number
+  }[],
+  organization: {
+      address: {
+          city: string,
+          country: string,
+          postalCode: string,
+          street: string
+      },
+      name: string,
+      bank: {
+          bic: string,
+          iban: string,
+          name: string
+      },
+      email: string,
+      legal: {
+          capital: string,
+          corporateFormShort: string,
+          naf: string,
+          rcs: string,
+          siret: string,
+          vatNumber: string
+      },
+      phone: string,
+  },
+  status: string,
+  language: string,
+  reconciled: boolean,
+  kind: "IncomeCreditNote" | "Income" | "Deposit"
+}[]
+```
+
+#### Succes
+```json
+{
+  "statusCode": 200,
+  "body": Invoices[]
+}
+```
+#### Errors
+- Bad Request :
+```json
+{
+    "statusCode": 400,
+    "message": "Bad Request"
+}
+```
+<br>
+
+- Unauthorized :
+```json
+{
+    "statusCode": 401,
+    "message": "Unauthorized"
+}
+```
+<br>
+
+- Server Error :
+```json
+{
+    "statusCode": 500,
+    "message": "Internal Server Error",
+}
+```
+<br>
+</details>
+
+<details>
+<br>
+<summary>Get invoice</summary>
+Your request must have the following informations:
+
+* Headers  
+  `Authorization: Bearer your_token`
+
+* Method  
+  `GET`
+
+* Path
+ `/sales/invoice/:invoiceId`
+
+* Content-Type  
+  `application/json`
+
+## Response
+
+```ts
+interface Invoice {
+  amountExcludingTaxes: number, // HT amount
+  amountIncludingTaxes: number, // TTC amount
+  currencyCode: string, // currencyCode EUR USD
+  invoiceDate: string,
+  invoiceFileName: string,
+  number: string,
+  organizationId: string,
+  vat: number, // VAT amount
+  _id: string, // invoice id to give to GET invoice or download invoice
+  client: {
+      address: {
+          city: string,
+          country: string,
+          postalCode: string,
+          street: string
+      },
+      companyName: string,
+      contact: {
+          email: string,
+          firstname: string,
+          name: string,
+          phone: string
+      },
+      dueDateDays: number,
+      vatNumber: string,
+  },
+  clientId string,
+  dueDate: string,
+  dueDateDays: number,
+  items: {
+      _id: string, // Item Id
+      articleCodeRef: string,
+      description: string,
+      discount: number,
+      quantity: number,
+      unitPrice: number,
+      vat: number,
+      vatKind: string,
+      vatPercentage: number
+  }[],
+  organization: {
+      address: {
+          city: string,
+          country: string,
+          postalCode: string,
+          street: string
+      },
+      name: string,
+      bank: {
+          bic: string,
+          iban: string,
+          name: string
+      },
+      email: string,
+      legal: {
+          capital: string,
+          corporateFormShort: string,
+          naf: string,
+          rcs: string,
+          siret: string,
+          vatNumber: string
+      },
+      phone: string,
+  },
+  status: string,
+  language: string,
+  reconciled: boolean,
+  kind: "IncomeCreditNote" | "Income" | "Deposit"
+}
+```
+
+#### Succes
+```json
+{
+  "statusCode": 200,
+  "body": Invoice
+}
+```
+#### Errors
+- Bad Request :
+```json
+{
+    "statusCode": 400,
+    "message": "Bad Request"
+}
+```
+<br>
+
+- Unauthorized :
+```json
+{
+    "statusCode": 401,
+    "message": "Unauthorized"
+}
+```
+<br>
+
+- Server Error :
+```json
+{
+    "statusCode": 500,
+    "message": "Internal Server Error",
+}
+```
+<br>
+</details>
+
+<details>
+<br>
+<summary>Get invoice file</summary>
+Your request must have the following informations:
+
+* Headers  
+  `Authorization: Bearer your_token`
+
+* Method  
+  `GET`
+
+* Path
+ `/sales/invoice/:invoiceId/download`
+
+## Response
+
+#### Succes
+```json
+{
+  "statusCode": 200,
+  "body": PDF blob of invoice file
+}
+```
+#### Errors
+- Bad Request :
+```json
+{
+    "statusCode": 400,
+    "message": "Bad Request"
+}
+```
+<br>
+
+- Unauthorized :
+```json
+{
+    "statusCode": 401,
+    "message": "Unauthorized"
+}
+```
+<br>
+
+- Server Error :
+```json
+{
+    "statusCode": 500,
+    "message": "Internal Server Error",
+}
+```
+<br>
+</details>
